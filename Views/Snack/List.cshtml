@@ -1,0 +1,23 @@
+@model SnackListViewModel
+
+<div class="container">
+    <div class="m-4">
+@if(@Model.CurrentCategory.Equals("none")){
+    <h2>Lanche não encontrado</h2>
+    <p>Infelizmente não temos o lanche que você está buscando :(</p>
+    <p><strong>Explore os lanches disponíveis:</strong></p>
+}
+else{
+    <h2>@Model.CurrentCategory</h2>
+}
+</div>
+</div>
+
+<div class="container">
+    <div class="row">
+    @foreach (var snack in Model.Snacks)
+    {
+        <partial name="_SnackCard" for="@snack" />
+    }
+    </div>
+</div>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Projeto MVC</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/project_mvc.styles.css" asp-append-version="true" />
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav
+            class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow justify-content-between">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Projeto MVC</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-row justify-content-end">
+                    <ul class="navbar-nav">
+                        <li class="nav-item px-2">
+                            <a class="nav-link text-light" asp-area="Admin" asp-controller="Admin"
+                                asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item px-2">
+                            <a class="nav-link text-light" asp-area="Admin" asp-controller="AdminSnack"
+                                asp-action="Index">Produtos</a>
+                        </li>
+                        <li class="nav-item px-2">
+                            <a class="nav-link text-light" asp-area="Admin" asp-controller="AdminCategory"
+                                asp-action="Index">Categorias</a>
+                        </li>
+                        <li class="nav-item px-2">
+                            <a class="nav-link text-light" asp-area="Admin" asp-controller="AdminOrder"
+                                asp-action="Index">Pedidos</a>
+                        </li>
+                        <li class="nav-item px-2">
+                            <a class="nav-link text-light" asp-area="Admin" asp-controller="AdminSalesReport"
+                                asp-action="Index">Relatório de vendas</a>
+                        </li>
+                        <li>
+                            <div class="dropdown">
+                                <a class="btn text-light dropdown-toggle" role="button" id="dropdownMenuLink"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Gráficos
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="AdminChart"
+                                        asp-action="Index">Vendas Anual</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="AdminChart"
+                                        asp-action="MonthlySales" asp-route-days="30">Vendas Mensal</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="AdminChart"
+                                        asp-action="WeeklySales" asp-route-days="7">Vendas Semanal</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item px-2">
+                            <a class="nav-link text-light" asp-area="Admin" asp-controller="AdminImages"
+                                asp-action="Index">Gerenciar Imagens</a>
+                        </li>
+                    </ul>
+                    @await Html.PartialAsync("_LoginPartial")
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div>
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - Projeto MVC
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

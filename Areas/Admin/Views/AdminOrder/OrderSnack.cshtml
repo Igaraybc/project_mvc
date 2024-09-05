@@ -1,0 +1,45 @@
+@model OrderSnackViewModel
+
+@{
+    ViewData["Title"] = "OrderSnacks";
+    decimal totalOrder = 0;
+}
+<div class="container my-5">
+<h1>Lanches do Pedido</h1>
+<hr />
+
+<h3>Order  :  @Html.DisplayFor(model => @Model.Order.OrderId)</h3>
+<h3>Cliente :  @Html.DisplayFor(model => @Model.Order.FirstName)</h3>
+<h3>Data    :  @Html.DisplayFor(model => @Model.Order.OrderSent)</h3>
+<h3>Entrega :  @Html.DisplayFor(model => @Model.Order.OrderDeliveredIn)</h3>
+
+<table class="table">
+    @foreach (var item in @Model.Order.OrderItems)
+    {
+        totalOrder += (@item.Snack.Price * @item.Quantity);
+        <tr>
+            <td align="right">
+                <h3>@Html.DisplayFor(modelItem => item.Snack.SnackName)</h3>
+            </td>
+            <td align="right">
+                <img src="@item.Snack.ImageUrl" class="img-fluid" height="100" width="100">
+            </td>
+            <td align="right">
+                <h3>@string.Format("{0:C}", item.Snack.Price)</h3>
+            </td>
+            <td align="right">
+                <h3>(@Html.DisplayFor(modelItem => item.Quantity))</h3>
+            </td>
+        </tr>
+    }
+    <tr>
+            <td colspan="2">&nbsp;</td>
+            <td align="right">
+                <h3>Total do Pedido : @string.Format("{0:C}", @totalOrder)</h3>
+            </td>
+    </tr>
+</table>
+<a asp-action="Index" class="btn btn-outline-info">Retornar</a>
+
+
+</div>

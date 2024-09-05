@@ -1,0 +1,20 @@
+@model Snack
+
+<div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-4 m-5">
+    <div>
+        <img class="card-img-top p-3 img-fluid" src="@Model.ImageUrl" alt="Snack image">
+    </div>
+    <div class="w-50">
+        <h5>@Model.SnackName</h5>
+        <h1 class="my-3">R$ @Model.Price</h1>
+        <p style="font-size: 18px;" class="mb-4">@Model.LongDescription</p>
+        <div class="d-flex">
+             <a asp-controller="Snack" asp-action="List" class="btn btn-outline-primary">
+                Ver todos os lanches
+            </a>
+            <a asp-controller="ShoppingCart" asp-action="AddItemToCart" asp-route-SnackId="@Model.SnackId" class="btn btn-success mx-3">
+                Adicionar ao carrinho
+            </a>
+        </div>
+    </div>
+</div> 

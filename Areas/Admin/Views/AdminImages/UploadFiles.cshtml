@@ -1,0 +1,21 @@
+<div class="container my-5">
+    <div class="container">
+    @if(ViewData["Error"] != null){
+        <h4>@ViewData["Error"]</h4>
+    }
+    </div>
+
+    <div class="container">
+        @if(ViewData["Result"] != null){
+            <h4>@ViewData["Result"]</h4>
+            <hr>
+            @if(ViewBag.Files != null){
+                @foreach(string file in ViewBag.Files){
+                    <li>
+                        @file
+                    </li>
+                }
+            }
+        }
+    </div>
+</div>

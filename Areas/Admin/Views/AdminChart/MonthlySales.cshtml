@@ -1,0 +1,61 @@
+<title>
+    @ViewData["Title"] - Gráfico de vendas
+</title>
+
+
+<div id="chart_div" style="width: 900px; height: 500px"></div>
+
+<script type="text/javascript">
+    google.charts.load('current', {'packages': ['corechart']});
+    google.charts.setOnLoadCallback(loadData);
+
+    function loadData() {
+        $.ajax({
+            url: '@Url.Action("SnackSales", "AdminChart")',
+            data: {days: 30},
+            dataType: "json",
+            type: "GET",
+            error: function (xhr, status, error){
+                var err = eval("("+xhr.responseText+")");
+                toastr.error(err.message);
+            },
+            success: function(data){
+                SnackSalesChart(data)
+                return false
+            }
+        })
+    }
+
+    function SnackSalesChart(data) {
+        var dataT = new google.visualization.DataTable();
+        dataT.addColumn('string', 'Lanche');
+        dataT.addColumn('number', 'Quantidade');
+        dataT.addColumn('number', 'Valores(R$)');
+        $.each(data, function(i, item) {
+            dataT.addRow(Object.values(item));
+        });
+        var options = {
+            title: 'Lanches - Vendas nos últimos 30 dias',
+            animation: {
+                duration: 2000, 
+                easing: 'out',
+                startup: true
+            },
+            curveType: 'function',
+            chartArea: {
+                width: '70%'
+            },
+            colors: ['#5202b5', '#d2a828'],
+            hAxis: {
+                title: 'Valor Total (em Reais)',
+                minValue: 0
+            },
+            vAxis: {
+                title: 'Lanches'
+            }
+        };
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+        chart.draw(dataT, options);
+    }
+
+</script>

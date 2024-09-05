@@ -1,0 +1,27 @@
+@model ShoppingCartViewModel
+
+@if(Model.ShoppingCart.ShoppingCartItems.Count > 0){
+    <div class="nav-item btn btn-light px-0 position-relative" style="height: 38px; margin-left: 1vw">
+        <a class="cart-btn nav-link text-light py-0" asp-area="" asp-controller="ShoppingCart" asp-action="Index">
+            <span><img class="cart-icon" src="~/img/Full-Cart-icon.png" width="25px"></span>
+            <span class="cart-number">
+                @Model.ShoppingCart.ShoppingCartItems.Sum(s => s.Quantity)
+            </span>
+        </a>
+    </div>
+}
+
+<style>
+    .cart-number{
+        background-color: red; 
+        font-size: 10px;
+        vertical-align: top; 
+        position: absolute;
+        padding: 0px 5px;
+        border-radius: 50%;
+    }
+    .cart-btn{
+        position: relative;
+        right: 5px;
+    }
+</style>

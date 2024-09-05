@@ -1,0 +1,36 @@
+@model LoginViewModel
+
+<div class="container d-flex flex-column-reverse flex-md-row justify-content-around align-items-center my-4">
+    <div class="image">
+        <img src="~/img/login_image.jpg" class="img-fluid" width="450px">
+    </div>
+    <div class="card p-3">
+        <div class="card-body">
+            <h3 class="card-title">Login</h3>
+            <form asp-controller="Account" asp-action="Login" method="post" role="form" class="form-horizontal">
+                <hr>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="ReturnUrl" />
+                <div class="form-group mb-3">
+                    <label asp-for="UserName" class="mb-1 control-label"></label>
+                    <div>
+                        <input asp-for="UserName" class="form-control" />
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group my-3">
+                    <label asp-for="Password" class="mb-1 control-label"></label>
+                    <div>
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="mx-3">
+                        <input type="submit" class="btn btn-success mt-2 w-100" value="Entrar" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

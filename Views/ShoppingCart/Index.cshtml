@@ -1,0 +1,78 @@
+@model ShoppingCartViewModel
+
+<div class="container my-5">
+@if(@Model.ShoppingCart.ShoppingCartItems.Count() == 0){
+    <div>Você ainda não adicionou itens ao seu carrinho :(</div>
+}
+else{
+<div>
+    <div class="row checkoutForm">
+        
+        <div>
+            <h4>Seu carrinho de compras : </h4>
+        </div>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Lanche</th>
+                    <th>Quantidade</th>
+                    <th class="text-right">Preço</th>
+                    <th class="text-right">Subtotal</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach(var item in @Model.ShoppingCart.ShoppingCartItems)
+                {
+                    <tr>
+                        <td class="text-left">@item.Snack.SnackName</td>
+                        <td class="text-center">
+                            <a class="btn btn-sm py-0" asp-controller="ShoppingCart" asp-action="RemoveItemFromCart" 
+                            asp-route-snackId="@item.Snack.SnackId" > 
+                             <img src="~/img/minus.png" width="14px" height="14px" />
+                            </a>
+                            <span class="mx-2">@item.Quantity</span>
+                            <a class="btn btn-sm py-0" asp-controller="ShoppingCart" asp-action="AddItemToCart" 
+                            asp-route-snackId="@item.Snack.SnackId"> 
+                             <img src="~/img/plus.png" width="12px" height="12px" />
+                            </a>
+                        </td>
+                        <td class="text-right">@item.Snack.Price.ToString("c")</td>
+                        
+                        <td class="text-right">
+                            @((item.Quantity * item.Snack.Price).ToString("c"))
+                        </td>
+
+                        <td class="text-center">
+                            <a asp-controller="ShoppingCart" asp-action="RemoveItemFromCart" 
+                            asp-route-lancheId="@item.Snack.SnackId"><img src="~/img/remove.ico" width="24px" height="24px" />
+                            </a>
+                        </td>
+                    </tr>                  
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="text-right">Total:</td>
+                    <td class="text-right">
+                        @Model.ShoppingCartTotal.ToString("c")
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+
+    
+        <div class="text-right">
+            <div class="d-flex justify-content-end">
+                <a class="btn btn-outline-primary" asp-controller="Snack" asp-action="List">Continuar Comprando</a>
+                &nbsp;&nbsp;&nbsp;
+                <a class="btn btn-success" asp-controller="Order" asp-action="Checkout">Finalizar Pedido</a>
+            </div>
+        </div>
+        <br />
+    </div>
+</div>
+}
+</div>

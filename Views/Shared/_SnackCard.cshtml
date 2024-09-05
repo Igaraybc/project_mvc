@@ -1,0 +1,32 @@
+@model Snack
+
+<div class="col-xs-auto col-sm-6 col-md-4 mb-4">
+        <div class="card h-100">
+            <img class="card-img-top p-3" src="@Model.ImageUrl" alt="Card image">
+            <div class="card-body card-header p-3 d-flex flex-column">
+                <h5 class="card-title justify-content-between d-inline-flex">
+                    @Model.SnackName
+                    <a class="btn" asp-controller="Snack" asp-action="Details" asp-route-SnackId="@Model.SnackId"><img src="~/img/full-screen.png" width="18px"></a>
+                </h5>
+
+                <p class="card-text"><strong>@Model.Price.ToString("c")</strong></p>
+                <p class="card-text">@Model.ShortDescription</p>
+                <div class="flex-grow-1 align-content-end">
+                    <a asp-controller="ShoppingCart" asp-action="AddItemToCart" asp-route-SnackId="@Model.SnackId" class="btn btn-success mx-2">
+                        Adicionar ao carrinho
+                    </a>
+                </div>
+            </div>
+        </div>
+</div>
+
+<style>
+    .card-img-top {
+    width: 100%;
+    height: 20vw;
+    max-height: 180px;
+    min-height: 120px;
+  
+    object-fit: contain;
+    }
+</style>
